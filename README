@@ -2,20 +2,9 @@ This is a python script for updating your FreeDNS account. This can be
 adapted for other services by changing the first string in the update_url
 variable below.
 
-****Make sure you get your update key, and put it between the quotes below in
-the update_key variable!!
-
-You can find your FreeDNS update key by logging into your freedns account
-online, and then clicking Dynamic DNS in the menu on the left, then at the
-bottom of the page, right-click Direct URL and copy the link. Paste the link
-below. The KEY is everything after the ?, so delete everything up to and
-including the ?. You can see that the update_url variable builds this URL
-everytime.
-
-This program creates/uses a file called ".freedns_ip" in the directory of the
-script. It also creates various log files.
-
-****Make sure the script has read/write access to this directory!
+This program creates/uses a file called ".freedns_ip" in the directory 
+of the script. It also creates various log files. Make sure the script 
+has read/write access to this directory!
 
 I have implemented cyclical logging, so when the log is full, it gets moved
 to log.1, and log.1 gets shifted to log.2, etc. Each log file is 4096 bytes
@@ -29,16 +18,42 @@ another if you know what you're doing.
 This script is free, and licensed under GPL2. It comes with NO warranties or
 guarantees, and I have no liabilities. Enjoy.
 
-****This script is designed to be added to your crontab
-([crontab -e] in most distros) and can be run by referencing its location
-because I put the shebang at the top. You can, however, manually run it via
-python /path/to/script.py
 
-Normally, you can create a folder in your home directory like this:
-mkdir ~/.ddns
+To Use this script:
 
-Then copy this script to that directory. Then add the following to your crontab:
-*/5 * * * * /home/user/.ddns/updateddns.py
+Make a directory in your home folder. Normally, you can create a folder 
+in your home directory like this:
+
+> mkdir ~/.ddns
+
+Copy this script to that folder.
+
+Get your update key. You can find your FreeDNS update key by logging 
+into your freedns account online, and then clicking Dynamic DNS in the 
+menu on the left, then at the bottom of the page, right-click Direct URL 
+and copy the link.
+
+In the script, find where it says
+
+> update_key = ''
+
+The KEY is everything after the ?, so delete everything up to and 
+including the ?. The, put whatever remains between those single 
+quotation marks. You can see that the update_url variable builds this 
+URL everytime.
+
+Now, add this script to your crontab. You can usually do this via:
+
+> crontab -e
+
+It can be run by referencing its location because I put the shebang at 
+the top of the script. You can, however, manually run it via:
+
+> python /path/to/script.py
+
+As an example, this is the line you would add to your crontab:
+
+*/5 * * * * python /home/user/.ddns/updateddns.py
 
 Just replace "user" with your username.
 
